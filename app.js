@@ -1,4 +1,5 @@
 //jshint esversion:6
+
 require('dotenv').config();
 const express = require("express");
 const bodyParser = require("body-parser");
@@ -14,12 +15,16 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static("public"));
 
-mongoose.connect("mongodb+srv://admin_Natalia:process.env.ATLAS_PASSWORD@cluster0.twbnk.mongodb.net/todolistDB", {
+ const password = process.env.ATLAS_PASSWORD;
+ const login = process.env.ATLAS_LOGIN;
+
+mongoose.connect("mongodb+srv://" + login + ":" + password + "@cluster0.twbnk.mongodb.net/todolistDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify:false,
   useCreateIndex: true
 });
+
 
 
 const itemsSchema = {
